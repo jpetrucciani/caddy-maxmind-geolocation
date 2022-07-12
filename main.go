@@ -151,6 +151,7 @@ func (MaxmindGeolocation) CaddyModule() caddy.ModuleInfo {
 func (m *MaxmindGeolocation) Provision(ctx caddy.Context) error {
 	var err error
 	m.logger = ctx.Logger(m)
+	m.DbPath = caddy.NewReplacer().ReplaceAll(m.DbPath, "")
 	m.dbInst, err = maxminddb.Open(m.DbPath)
 	if err != nil {
 		return fmt.Errorf("cannot open database file %s: %v", m.DbPath, err)
