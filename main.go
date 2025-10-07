@@ -191,6 +191,7 @@ func (m *MaxmindGeolocation) Provision(ctx caddy.Context) error {
 }
 
 func (m *MaxmindGeolocation) Validate() error {
+	m.DbPath = caddy.NewReplacer().ReplaceAll(m.DbPath, "")
 	if m.DbPath == "" {
 		return fmt.Errorf("db_path is required")
 	}
